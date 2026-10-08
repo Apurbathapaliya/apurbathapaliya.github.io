@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apurba Deep Thapaliya · Data Analyst</title>
+<meta name="description" content="Apurba Deep Thapaliya is a data analyst and data engineer, and an MS Data Analytics student at Clark University in Worcester, MA.">
+<meta name="author" content="Apurba Deep Thapaliya">
+<meta property="og:title" content="Apurba Deep Thapaliya · Data Analyst">
+<meta property="og:description" content="I turn messy data into clear, reliable answers. Python, SQL, AWS, Tableau, and a year of LLM training data for NVIDIA and Google projects.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f3ede2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23d4532a'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%23f3ede2'%3Ea%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3ede2;
+  --paper-2: #fbf8f2;
+  --paper-3: #e9e1d2;
+  --ink: #1e1a15;
+  --ink-2: #5b5247;
+  --ink-3: #8f8577;
+  --rule: #d8cebd;
+  --clay: #d4532a;
+  --clay-soft: #f5d9cb;
+  --moss: #2e5a4c;
+  --moss-soft: #d6e4dc;
+  --sun: #f0b440;
+  --code-bg: #1f1b16;
+  --code-ink: #efe6d6;
+  --serif: "Inter Tight", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+:root[data-theme="dark"] {
+  --paper: #16130f; --paper-2: #1e1a15; --paper-3: #2a251e; --ink: #f1e9dc; --ink-2: #c3b8a7; --ink-3: #8c826f;
+  --rule: #383026; --clay: #f07a4f; --clay-soft: #3b2219; --moss: #8cc5ad; --moss-soft: #1f322b; --sun: #f3c160;
+  --code-bg: #0e0c09; --code-ink: #efe6d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #16130f; --paper-2: #1e1a15; --paper-3: #2a251e; --ink: #f1e9dc; --ink-2: #c3b8a7; --ink-3: #8c826f;
+    --rule: #383026; --clay: #f07a4f; --clay-soft: #3b2219; --moss: #8cc5ad; --moss-soft: #1f322b; --sun: #f3c160;
+    --code-bg: #0e0c09; --code-ink: #efe6d6;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+h1, h2, h3, h4, p, li, dd, a, span { overflow-wrap: break-word; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 17px/1.7 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; transition: background .35s, color .35s; }
+/* paper grain */
+body::before { content: none; display: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0 0.3 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+:root[data-theme="dark"] body::before { mix-blend-mode: screen; opacity: .12; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--sun); color: #1e1a15; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 600; margin: 0; letter-spacing: -0.025em; line-height: 1.1; }
+em.i { font-style: normal; font-weight: inherit; color: var(--clay); }
+.mark { background: linear-gradient(transparent 62%, color-mix(in srgb, var(--sun) 55%, transparent) 62%); padding: 0 .1em; font-weight: 600; color: var(--ink); -webkit-box-decoration-break: clone; box-decoration-break: clone; color: inherit; }
+:root[data-theme="dark"] .mark { background: color-mix(in srgb, var(--sun) 28%, transparent); }
+section { padding: 110px 0; position: relative; }
+.label { display: flex; align-items: center; gap: 14px; font: 500 13px var(--mono); color: var(--ink-3); text-transform: lowercase; margin-bottom: 18px; }
+.label b { color: var(--clay); font-weight: 500; }
+.label::after { content: ""; height: 1px; flex: 1; background: var(--rule); max-width: 120px; }
+.title { font-size: clamp(30px, 3.8vw, 46px); max-width: 760px; font-weight: 700; letter-spacing: -0.035em; }
+.intro { color: var(--ink-2); max-width: 600px; margin: 18px 0 0; font-size: 18px; }
+
+/* ---------- nav ---------- */
+.nav { position: sticky; top: 0; z-index: 40; transition: background .3s, box-shadow .3s; }
+.nav.scrolled { background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 1px 0 var(--rule); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+.word { font: 700 21px var(--serif); text-decoration: none; letter-spacing: -0.03em; }
+.word span { color: var(--clay); }
+.menu { display: flex; gap: 26px; align-items: center; }
+.menu a { text-decoration: none; font-size: 15px; font-weight: 500; color: var(--ink-2); position: relative; padding: 4px 0; }
+.menu a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform .3s; border-radius: 2px; }
+.menu a:hover, .menu a.on { color: var(--ink); }
+.menu a:hover::after, .menu a.on::after { transform: scaleX(1); }
+.right { display: flex; gap: 10px; align-items: center; }
+.round { width: 40px; height: 40px; border-radius: 10px; border: 1px solid var(--rule); background: transparent; display: grid; place-items: center; cursor: pointer; transition: transform .4s, border-color .2s; }
+.round:hover { border-color: var(--ink); }
+.round .moon { display: none; }
+:root[data-theme="dark"] .round .sun { display: none; }
+:root[data-theme="dark"] .round .moon { display: block; }
+.pill-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: 10px; border: 1px solid var(--ink); cursor: pointer; transition: transform .2s, background .2s, color .2s, box-shadow .2s; background: transparent; }
+.pill-btn.solid { background: var(--ink); color: var(--paper); }
+.pill-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -8px rgba(30,26,21,.45); }
+.pill-btn:not(.solid):hover { border-color: var(--clay); color: var(--clay); }
+.pill-btn.small { padding: 8px 16px; font-size: 14px; }
+.burger { display: none; }
+
+/* ---------- hero ---------- */
+.hero { padding: 70px 0 80px; }
+.hero-grid { display: grid; grid-template-columns: 1.35fr .9fr; gap: 64px; align-items: start; }
+.hello { font: 500 14px var(--mono); color: var(--ink-2); display: flex; align-items: center; gap: 10px; }
+.hello i { width: 10px; height: 10px; border-radius: 50%; background: var(--moss); display: inline-block; animation: breathe 2.4s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.5); opacity: .5; } }
+.hero h1 { font-size: clamp(40px, 5.2vw, 64px); margin: 22px 0 26px; line-height: 1.04; letter-spacing: -0.04em; font-weight: 700; }
+.hero h1 .messy { color: var(--clay); }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.hero .lede { font-size: 19.5px; color: var(--ink-2); max-width: 580px; margin: 0; }
+.hero .lede b { color: var(--ink); font-weight: 600; }
+.hero .acts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; align-items: center; }
+
+/* index card */
+.card-now { background: var(--paper-2); border: 1px solid var(--rule); border-radius: 16px; padding: 26px 26px 18px; position: relative; box-shadow: 0 1px 2px rgba(30,26,21,.05), 0 20px 40px -24px rgba(30,26,21,.35); margin-top: 26px; transition: transform .3s, box-shadow .3s; }
+.card-now:hover { transform: translateY(-3px); }
+.card-now::before { content: ""; position: absolute; top: 0; left: 26px; right: 26px; height: 3px; border-radius: 0 0 3px 3px; background: var(--clay); }
+.card-now h3 { font: 500 12.5px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--clay); margin-bottom: 8px; }
+.card-now dl { margin: 0; display: grid; gap: 0; }
+.card-now .row { display: grid; grid-template-columns: 98px 1fr; gap: 12px; padding: 12px 0; border-top: 1px dashed var(--rule); }
+.card-now dt { font: 500 12.5px var(--mono); color: var(--ink-3); padding-top: 3px; }
+.card-now dd { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.card-now dd small { color: var(--ink-3); display: block; font-size: 13.5px; }
+
+/* ---------- numbers ribbon ---------- */
+.ribbon { border-block: 1px solid var(--rule); background: var(--paper-2); }
+.ribbon .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+.num { padding: 30px 22px; border-left: 1px solid var(--rule); }
+.num:first-child { border-left: 0; padding-left: 0; }
+.num b { font: 700 48px/1 var(--serif); letter-spacing: -0.04em; display: block; }
+.num b sup { font-size: .45em; color: var(--clay); vertical-align: top; position: relative; top: .25em; margin-left: 2px; }
+.num span { display: block; margin-top: 10px; color: var(--ink-2); font-size: 14.5px; line-height: 1.5; }
+
+/* ---------- research (featured) ---------- */
+.feature { margin-top: 44px; display: grid; grid-template-columns: 1.4fr .6fr; border: 1px solid var(--rule); border-radius: 20px; background: var(--paper-2); overflow: hidden; box-shadow: 0 24px 48px -30px rgba(30,26,21,.35); }
+.feature .main { padding: 46px 48px; position: relative; }
+.feature .main::before { content: ""; position: absolute; left: 0; top: 46px; bottom: 46px; width: 4px; border-radius: 0 4px 4px 0; background: var(--clay); }
+.feature .venue { display: inline-flex; gap: 8px; align-items: center; font: 500 12.5px var(--mono); color: var(--moss); background: var(--moss-soft); padding: 6px 12px; border-radius: 999px; }
+.feature h3 { font-size: clamp(26px, 3.1vw, 38px); margin: 20px 0 14px; font-weight: 700; letter-spacing: -0.03em; }
+.feature .authors { color: var(--ink-2); margin: 0 0 22px; font-size: 16px; }
+.feature .authors b { color: var(--ink); font-weight: 600; }
+.feature p { color: var(--ink-2); margin: 0 0 14px; max-width: 640px; }
+.feature .side { background: var(--ink); color: var(--paper); padding: 46px 36px; display: flex; flex-direction: column; justify-content: center; gap: 16px; }
+:root[data-theme="dark"] .feature .side { background: var(--paper-3); color: var(--ink); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .feature .side { background: var(--paper-3); color: var(--ink); } }
+.feature .side .k { font: 500 12px var(--mono); text-transform: uppercase; letter-spacing: .12em; color: var(--sun); }
+.feature .side h4 { margin: 0; font: 700 22px/1.25 var(--serif); letter-spacing: -0.02em; }
+.feature .side p { margin: 0; opacity: .8; font-size: 15px; color: inherit; }
+.req { align-self: flex-start; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; background: var(--clay); color: #fff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 10px; transition: transform .2s, box-shadow .2s; }
+.req:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -10px rgba(212,83,42,.7); }
+
+/* ---------- selected work ---------- */
+.wins { margin-top: 44px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.win { min-width: 0; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s, border-color .3s; }
+.win:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--clay) 40%, var(--rule)); box-shadow: 0 22px 40px -26px rgba(30,26,21,.45); }
+.win .viz { height: 128px; border-radius: 12px; background: var(--paper-3); margin-bottom: 22px; position: relative; overflow: hidden; display: grid; place-items: center; }
+.win .co { font: 500 12px var(--mono); color: var(--clay); text-transform: uppercase; letter-spacing: .1em; }
+.win h3 { font-size: 21px; margin: 8px 0 10px; font-weight: 700; letter-spacing: -0.02em; }
+.win p { margin: 0 0 18px; color: var(--ink-2); font-size: 15.5px; flex: 1; }
+.win .tools { margin-top: 0; }
+/* viz: bars */
+.bars { display: flex; align-items: flex-end; gap: 22px; height: 86px; }
+.bars div { width: 46px; border-radius: 8px 8px 3px 3px; background: var(--rule); height: 0; transition: height 1.1s cubic-bezier(.2,.8,.2,1); position: relative; }
+.bars div.after { background: var(--clay); }
+.bars div span { position: absolute; top: -22px; left: 50%; transform: translateX(-50%); font: 600 12px var(--mono); color: var(--ink-2); white-space: nowrap; }
+.in .bars div.before { height: 54px; } .in .bars div.after { height: 70px; transition-delay: .25s; }
+.bars.reset div { height: 0 !important; transition: none !important; }
+/* viz: pipeline */
+.flowline { display: flex; align-items: center; gap: 0; }
+.flowline .st { font: 600 11px var(--mono); padding: 7px 8px; border-radius: 8px; background: var(--paper-2); border: 1px solid var(--rule); color: var(--ink); opacity: 0; transform: translateY(6px); transition: opacity .5s, transform .5s; }
+.flowline .ln { width: 12px; height: 2px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform .4s; }
+.in .flowline .st, .in .flowline .ln { opacity: 1; transform: none; }
+.in .flowline > :nth-child(2) { transition-delay: .15s; } .in .flowline > :nth-child(3) { transition-delay: .25s; } .in .flowline > :nth-child(4) { transition-delay: .35s; }
+.in .flowline > :nth-child(5) { transition-delay: .45s; } .in .flowline > :nth-child(6) { transition-delay: .55s; } .in .flowline > :nth-child(7) { transition-delay: .65s; }
+/* viz: sheet */
+.sheet { display: grid; grid-template-columns: repeat(5, 30px); gap: 4px; }
+.sheet i { height: 11px; border-radius: 3px; background: var(--rule); opacity: 0; transition: opacity .4s; }
+.sheet i.h { background: var(--moss); }
+.sheet i.c { background: var(--clay); opacity: 0; }
+.in .sheet i { opacity: 1; }
+.colophon b { color: var(--ink-2); font-weight: 500; }
+
+/* win interactions */
+.win .viz { cursor: default; }
+.viz .cap { position: absolute; left: 14px; right: 14px; bottom: 10px; text-align: center; font: 500 12px var(--mono); color: var(--ink-3); transition: color .2s; }
+.win .viz .stage { transform: translateY(-10px); }
+.win:hover .viz .cap { color: var(--ink-2); }
+.bars div { cursor: pointer; }
+.bars div.after:hover, .bars div.before:hover { filter: brightness(1.06); }
+.win:hover .bars div.after { height: 76px; }
+.flowline .st { cursor: pointer; transition: opacity .5s, transform .5s, background .25s, color .25s, border-color .25s; }
+.flowline.ready > * { transition-delay: 0s !important; }
+.flowline .st.on { background: var(--clay); color: #fff; border-color: var(--clay); transform: translateY(-2px); }
+.flowline .ln { position: relative; }
+.flowline .ln.on { background: var(--moss); }
+.sheet i { transition: opacity .4s, background .25s, transform .25s; }
+.sheet i.go { background: color-mix(in srgb, var(--moss) 55%, var(--rule)); transform: scaleY(1.15); }
+.sheet i.sum { background: var(--clay); }
+/* ---------- email chooser ---------- */
+.mailmenu { position: fixed; z-index: 95; min-width: 200px; background: var(--paper-2); border: 1px solid var(--rule); border-radius: 14px; padding: 8px; box-shadow: 0 20px 40px -18px rgba(30,26,21,.45); animation: pop .18s ease; }
+@keyframes pop { from { opacity: 0; transform: translateY(4px); } }
+.mailmenu p { margin: 4px 10px 6px; font: 500 12px var(--mono); color: var(--ink-3); }
+.mailmenu a, .mailmenu button { display: block; width: 100%; text-align: left; padding: 10px 12px; border-radius: 9px; border: 0; background: none; font: 500 15px var(--sans); color: var(--ink); text-decoration: none; cursor: pointer; }
+.mailmenu a:hover, .mailmenu button:hover, .mailmenu a:focus-visible { background: var(--paper-3); }
+.mailmenu button { border-top: 1px solid var(--rule); border-radius: 0 0 9px 9px; margin-top: 4px; color: var(--ink-2); }
+/* ---------- experience filter ---------- */
+.filter { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.filter .box { flex: 1 1 260px; max-width: 360px; display: flex; align-items: center; gap: 10px; border: 1px solid var(--rule); background: var(--paper-2); border-radius: 10px; padding: 10px 14px; transition: border-color .2s; }
+.filter .box:focus-within { border-color: var(--ink); }
+.filter input { border: 0; outline: 0; background: transparent; font: 15px var(--sans); color: var(--ink); width: 100%; }
+.filter input::placeholder { color: var(--ink-3); }
+.fchip { border: 1px solid var(--rule); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 14px; font-weight: 500; cursor: pointer; color: var(--ink-2); transition: all .2s; }
+.fchip:hover { border-color: var(--ink); color: var(--ink); }
+.fchip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.fcount { font: 13px var(--mono); color: var(--ink-3); margin-left: 4px; }
+.job.nomatch { opacity: .35; }
+.job-inner li mark { background: color-mix(in srgb, var(--sun) 55%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+.job-inner li.hit::before { color: var(--moss); }
+
+/* ---------- experience ---------- */
+.jobs { margin-top: 56px; border-top: 1px solid var(--ink-3); }
+.job { border-bottom: 1px solid var(--rule); }
+.job-btn { width: 100%; background: none; border: 0; cursor: pointer; text-align: left; display: grid; grid-template-columns: 70px 1fr auto 40px; gap: 24px; align-items: center; padding: 30px 0; transition: padding .3s; }
+.job-btn .n { font: 500 13px var(--mono); color: var(--ink-3); }
+.job-btn h3 { font-size: clamp(22px, 2.6vw, 30px); transition: color .25s, transform .3s; }
+.job-btn .co { color: var(--ink-2); font-size: 15.5px; margin-top: 4px; display: block; font-family: var(--sans); }
+.job-btn .yr { font: 500 13.5px var(--mono); color: var(--ink-2); white-space: nowrap; }
+.job-btn .plus { width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--rule); display: grid; place-items: center; transition: transform .35s, background .25s, border-color .25s; }
+.job-btn:hover h3 { color: var(--clay); transform: translateX(6px); }
+.job-btn:hover .plus { border-color: var(--ink); }
+.job.open .plus { transform: rotate(45deg); background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.job-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s cubic-bezier(.4,0,.2,1); }
+.job.open .job-body { grid-template-rows: 1fr; }
+.job-body > div { overflow: hidden; }
+.job-inner { display: grid; grid-template-columns: 70px 1fr 260px; gap: 24px; padding: 0 0 36px; }
+.job-inner ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 14px; grid-column: 2; }
+.job-inner li { position: relative; padding-left: 28px; color: var(--ink-2); }
+.job-inner li::before { content: "→"; position: absolute; left: 0; color: var(--clay); font-family: var(--mono); }
+.job-inner aside { grid-column: 3; }
+.big-fact { background: var(--moss-soft); border-radius: 12px; padding: 18px; color: var(--moss); }
+.big-fact b { font: 700 38px/1 var(--serif); letter-spacing: -0.03em; display: block; }
+.big-fact span { color: var(--ink); font-size: 14px; display: block; margin-top: 8px; line-height: 1.5; }
+.tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tools span { font: 12px var(--mono); padding: 4px 9px; border: 1px solid var(--rule); border-radius: 999px; color: var(--ink-2); background: var(--paper-2); }
+
+/* ---------- skills ---------- */
+.shelves { margin-top: 50px; display: grid; gap: 0; border-top: 1px solid var(--ink-3); }
+.shelf { display: grid; grid-template-columns: 260px 1fr; gap: 28px; padding: 26px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+.shelf h3 { font-size: 19px; font-weight: 600; }
+.shelf .items { display: flex; flex-wrap: wrap; gap: 10px; }
+.tag { position: relative; border: 1px solid var(--rule); border-radius: 999px; padding: 7px 15px; font-size: 15px; font-weight: 500; background: var(--paper-2); cursor: default; transition: transform .25s cubic-bezier(.3,1.6,.5,1), background .2s, color .2s; }
+.tag:hover { transform: translateY(-2px); background: var(--ink); color: var(--paper); }
+.tag .where { position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(calc(-50% + var(--dx, 0px))) translateY(-4px); background: var(--clay); color: #fff; font-size: 13px; font-weight: 500; line-height: 1.4; padding: 7px 11px; border-radius: 8px; width: max-content; max-width: 220px; opacity: 0; pointer-events: none; transition: all .2s; z-index: 5; }
+.tag:hover .where, .tag:focus-visible .where { opacity: 1; transform: translateX(calc(-50% + var(--dx, 0px))) translateY(0); }
+@media (hover: none) { .tag .where { display: none; } }
+
+/* ---------- education / journey ---------- */
+.journey { margin-top: 50px; display: grid; grid-template-columns: 1fr 160px 1fr; align-items: center; gap: 0; }
+.school { border: 1px solid var(--rule); border-radius: 16px; background: var(--paper-2); padding: 30px; position: relative; }
+.school .yr { font: 500 13px var(--mono); color: var(--clay); }
+.school h3 { font-size: 24px; margin: 10px 0 6px; }
+.school p { margin: 0; color: var(--ink-2); }
+.school .badge { position: absolute; top: 22px; right: 22px; font: 600 12.5px var(--mono); background: var(--moss-soft); color: var(--moss); padding: 5px 11px; border-radius: 999px; }
+.path { position: relative; height: 120px; }
+.path svg { width: 100%; height: 100%; overflow: visible; }
+.path path { stroke: var(--clay); stroke-width: 2; fill: none; stroke-dasharray: 6 8; animation: march 1.2s linear infinite; }
+@keyframes march { to { stroke-dashoffset: -28; } }
+.path .plane { position: absolute; left: 50%; top: 10px; transform: translateX(-50%); font: 600 12px var(--mono); color: var(--ink-3); white-space: nowrap; }
+
+/* ---------- contact ---------- */
+.contact { text-align: center; padding: 130px 0 120px; }
+.contact .big { font-size: clamp(38px, 5.5vw, 68px); line-height: 1; letter-spacing: -0.045em; font-weight: 700; }
+.contact .big em { color: var(--clay); font-style: normal; }
+.contact p { color: var(--ink-2); max-width: 520px; margin: 26px auto 0; font-size: 18.5px; }
+.email-btn { margin-top: 38px; display: inline-flex; align-items: center; gap: 14px; font: 600 clamp(17px, 2vw, 21px) var(--sans); padding: 16px 28px; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper-2); cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.email-btn:hover { transform: translateY(-2px); border-color: var(--clay); box-shadow: 0 12px 28px -14px rgba(30,26,21,.45); }
+.email-btn small { font: 12px var(--mono); color: var(--ink-3); }
+.contact .links { display: flex; justify-content: center; gap: 26px; margin-top: 30px; flex-wrap: wrap; }
+.contact .links a { font-weight: 600; text-decoration: none; border-bottom: 2px solid var(--clay); padding-bottom: 2px; }
+footer { border-top: 1px solid var(--rule); padding: 26px 0 40px; font-size: 14px; color: var(--ink-3); }
+footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+.toast { position: fixed; bottom: 26px; left: 50%; transform: translate(-50%, 20px); opacity: 0; background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 999px; font-size: 14.5px; transition: all .3s; z-index: 90; pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+.rv.in { opacity: 1; transform: none; }
+:focus-visible { outline: 2.5px solid var(--clay); outline-offset: 3px; border-radius: 6px; }
+
+@media (max-width: 1100px) {
+  .wins { grid-template-columns: 1fr; }
+  .win { display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr); column-gap: 30px; align-content: start; }
+  .win .viz { grid-row: 1 / span 4; height: auto; min-height: 170px; margin-bottom: 0; }
+  .win > :not(.viz) { grid-column: 2; }
+  .win p { margin-bottom: 14px; }
+  .feature { grid-template-columns: 1fr; }
+  .feature .side { padding: 34px 48px; }
+}
+@media (max-width: 900px) {
+  .journey { grid-template-columns: 1fr; gap: 14px; max-width: 560px; }
+  .path { height: 70px; }
+  .path svg { transform: rotate(90deg); width: 70px; margin: 0 auto; display: block; }
+  .path .plane { display: none; }
+}
+@media (max-width: 960px) {
+  .hero-grid, .feature { grid-template-columns: 1fr; }
+  .card-now { max-width: 480px; }
+  .ribbon .wrap { grid-template-columns: repeat(2, 1fr); }
+  .num:nth-child(3) { border-left: 0; padding-left: 0; }
+  .num:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .job-inner { grid-template-columns: 1fr; }
+  .job-inner ul, .job-inner aside { grid-column: 1; }
+  .shelf { grid-template-columns: 1fr; gap: 14px; }
+  .menu { position: fixed; top: 74px; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--paper); border-bottom: 1px solid var(--rule); padding: 8px 28px 20px; display: none; }
+  .menu.open { display: flex; }
+  .menu { max-height: calc(100vh - 74px); max-height: calc(100dvh - 74px); overflow-y: auto; overscroll-behavior: contain; }
+  .menu a { padding: 12px 0; font-size: 17px; }
+  .burger { display: grid; }
+  .right .pill-btn { display: none; }
+}
+@media (max-width: 680px) {
+  section { padding: 80px 0; }
+  .wrap { padding: 0 20px; }
+  .job-btn { grid-template-columns: 1fr 36px; gap: 8px 14px; padding: 24px 0; }
+  .job-btn .n { display: none; }
+  .job-btn .yr { grid-row: 2; grid-column: 1; }
+  .job-btn .plus { grid-row: 1 / span 2; grid-column: 2; }
+  .feature .main, .feature .side { padding: 30px 24px; }
+  .feature .main::before { top: 30px; bottom: 30px; }
+  .num { padding: 22px 14px; }
+  .num b { font-size: 40px; }
+  .tag .where { display: none; }
+  .email-btn { flex-direction: column; gap: 4px; padding: 14px 22px; font-size: 16px; max-width: 100%; }
+  .win { display: flex; }
+  .win .viz { height: 128px; min-height: 0; margin-bottom: 22px; }
+}
+@media (max-width: 420px) {
+  .wrap { padding: 0 16px; }
+  .win { padding: 20px; }
+  .flowline .st { font-size: 10px; padding: 6px 6px; }
+  .flowline .ln { width: 9px; }
+  .num { padding: 20px 10px; }
+  .num b { font-size: 34px; }
+  .num span { font-size: 13.5px; }
+  .card-now { padding: 22px 18px 14px; }
+  .card-now .row { grid-template-columns: 84px minmax(0, 1fr); gap: 10px; }
+  .feature .main, .feature .side { padding: 26px 20px; }
+  .school { padding: 24px 20px; }
+  .school .badge { position: static; display: inline-block; margin-bottom: 10px; }
+  .contact .links { gap: 18px; }
+  .hero .acts .pill-btn { flex: 1 1 100%; justify-content: center; text-align: center; }
+}
+@media (max-width: 960px) and (max-height: 500px) {
+  .menu a { padding: 8px 0; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .rv { opacity: 1; transform: none; }
+}
+@media print { .nav, .filter, .toast { display: none !important; } .rv { opacity: 1; transform: none; } body::before { display: none; } }
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="word" href="#top">apurba<span>.</span></a>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="#highlights">Highlights</a>
+      <a href="#research">Research</a>
+      <a href="#work">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="right">
+      <button class="round" id="theme" aria-label="Switch light or dark theme">
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <a class="pill-btn solid small" href="assets/Apurba_Deep_Thapaliya_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+      <button class="round burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="hello"><i></i>Apurba Deep Thapaliya · Data Analyst &amp; Data Engineer · Worcester, MA</p>
+        <h1>I turn <span class="messy">messy data</span> into clear, reliable answers.</h1>
+        <p class="lede">I'm a data analytics graduate student at <b>Clark University</b>. I write <b>Python</b> and <b>SQL</b> to clean, store and query data on <b>AWS</b>, build dashboards in Tableau and Excel, and spent a year creating training data for large language models on <b>NVIDIA</b> and <b>Google</b> projects.</p>
+        <div class="acts">
+          <a class="pill-btn solid" href="#work">View experience</a>
+          <a class="pill-btn" href="assets/Apurba_Deep_Thapaliya_Resume.pdf" download>Download resume</a>
+          <a class="round" href="https://www.linkedin.com/in/apurba-thapaliya" target="_blank" rel="noopener" aria-label="LinkedIn" style="width:46px;height:46px">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg></a>
+          <a class="round" href="mailto:apurba.thapaliya@gmail.com" aria-label="Email" style="width:46px;height:46px">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></a>
+        </div>
+      </div>
+
+      <aside class="card-now rv" aria-label="What I'm doing now">
+        <h3>Right now</h3>
+        <dl>
+          <div class="row"><dt>studying</dt><dd>MS in Data Analytics, Clark University<small>graduating May 2027</small></dd></div>
+          <div class="row"><dt>working</dt><dd>Graduate Assistant for two Deans' offices<small>Excel tracking and reporting</small></dd></div>
+          <div class="row"><dt>published</dt><dd>A machine learning paper on patient no-shows<small>Springer Nature, July 2026</small></dd></div>
+          <div class="row"><dt>looking for</dt><dd>Data analyst and data engineering roles<small>internships and new-grad roles</small></dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <div class="ribbon">
+    <div class="wrap">
+      <div class="num rv"><b data-to="30" data-suf="%">0</b><span>model accuracy gain on the NVIDIA Arcade AI project</span></div>
+      <div class="num rv"><b data-to="4.0" data-dec="1">0</b><span>undergraduate GPA in Computer Science and IT</span></div>
+      <div class="num rv"><b data-to="2">0</b><span>big-name client projects: NVIDIA and Google</span></div>
+      <div class="num rv"><b data-to="1">0</b><span>paper published by Springer Nature</span></div>
+    </div>
+  </div>
+
+  <!-- SELECTED WORK -->
+  <section id="highlights" style="padding-bottom:40px">
+    <div class="wrap">
+      <div class="label rv"><b>01</b> selected work</div>
+      <h2 class="title rv">Three things I'm proud of</h2>
+      <div class="wins">
+        <article class="win rv">
+          <div class="viz" id="vizBars"><div class="stage"><div class="bars"><div class="before"><span>before</span></div><div class="after"><span id="pct">+30%</span></div></div></div><span class="cap" id="capBars">hover to replay</span></div>
+          <span class="co">Invisible Technologies · NVIDIA project</span>
+          <h3>Better LLM accuracy through better training data</h3>
+          <p>Generated and tested RLHF and fine-tuning data that helped lift model accuracy by 30% on the NVIDIA Arcade AI project. Also built training data for a Google project.</p>
+          <div class="tools"><span>RLHF</span><span>SFT</span><span>LLMs</span><span>Python</span></div>
+        </article>
+        <article class="win rv">
+          <div class="viz" id="vizFlow"><div class="stage"><div class="flowline"><span class="st">Python</span><span class="ln"></span><span class="st">S3</span><span class="ln"></span><span class="st">Athena</span><span class="ln"></span><span class="st">Tableau</span></div></div><span class="cap" id="capFlow">hover a step</span></div>
+          <span class="co">Deerhold · data engineering</span>
+          <h3>A data pipeline for public price files</h3>
+          <p>Standardized raw public price files with Python, loaded them into Amazon S3, queried them with SQL in Athena, and turned the results into Tableau dashboards.</p>
+          <div class="tools"><span>Python</span><span>AWS</span><span>SQL</span><span>Tableau</span></div>
+        </article>
+        <article class="win rv">
+          <div class="viz" id="vizSheet"><div class="stage"><div class="sheet"><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i class="h"></i><i style="transition-delay:0.04s"></i><i style="transition-delay:0.08s"></i><i style="transition-delay:0.12s"></i><i style="transition-delay:0.16s"></i><i style="transition-delay:0.20s"></i><i style="transition-delay:0.24s"></i><i class="c" style="opacity:1;transition-delay:0.28s"></i><i style="transition-delay:0.32s"></i><i style="transition-delay:0.36s"></i><i style="transition-delay:0.40s"></i><i style="transition-delay:0.44s"></i><i style="transition-delay:0.48s"></i><i style="transition-delay:0.52s"></i><i class="c" style="opacity:1;transition-delay:0.56s"></i><i style="transition-delay:0.60s"></i><i style="transition-delay:0.64s"></i><i style="transition-delay:0.68s"></i><i style="transition-delay:0.72s"></i><i style="transition-delay:0.76s"></i><i style="transition-delay:0.80s"></i></div></div><span class="cap" id="capSheet">hover to build a report</span></div>
+          <span class="co">Clark University · reporting</span>
+          <h3>Reporting that two Deans' offices rely on</h3>
+          <p>Track event and planning data in Excel and turn it into reports for the Dean of the College and the Dean of Students office.</p>
+          <div class="tools"><span>Excel</span><span>Reporting</span><span>Stakeholders</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH (featured) -->
+  <section id="research">
+    <div class="wrap">
+      <div class="label rv"><b>02</b> research</div>
+      <h2 class="title rv">Published work</h2>
+      <article class="feature rv">
+        <div class="main">
+          <span class="venue">Springer Nature · ESCS'26 · July 2026</span>
+          <h3>Weekday Stratified Clinical Patient Appointment No-Show Analysis Using Machine Learning</h3>
+          <p class="authors">E. Tokgoz, <b>A. D. Thapaliya</b> and N. Rimal</p>
+          <p>Missed appointments are a constant problem for clinics. They leave scheduled time unused and delay care for the patients who need it.</p>
+          <p>This paper uses machine learning to study clinical appointment no-shows, looking at the data separately for each day of the week to see whether the patterns behind missed appointments change from one weekday to the next.</p>
+        </div>
+        <aside class="side">
+          <span class="k">Read the paper</span>
+          <h4>Want the full paper?</h4>
+          <p>It's published in the ESCS'26 proceedings by Springer Nature. Email me and I'll send you a copy.</p>
+          <a class="req" href="mailto:apurba.thapaliya@gmail.com?subject=Request%20for%20your%20paper%3A%20Weekday%20Stratified%20No-Show%20Analysis">Request the paper
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </aside>
+      </article>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="work" style="padding-top:40px">
+    <div class="wrap">
+      <div class="label rv"><b>03</b> experience</div>
+      <h2 class="title rv">Experience</h2>
+      <div class="filter rv" role="search">
+        <label class="box"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input id="jobSearch" type="search" placeholder="Search my experience, e.g. Tableau" aria-label="Search my experience"></label>
+        <div id="fchips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+        <span class="fcount" id="fcount" aria-live="polite"></span>
+      </div>
+      <div class="jobs rv" id="jobs"></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" style="padding-top:40px">
+    <div class="wrap">
+      <div class="label rv"><b>04</b> skills</div>
+      <h2 class="title rv">Skills and tools</h2>
+      <p class="intro rv">Hover over any skill to see where I used it.</p>
+      <div class="shelves" id="shelves"></div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="padding-top:40px">
+    <div class="wrap">
+      <div class="label rv"><b>05</b> education</div>
+      <h2 class="title rv">From Nepal <em class="i">to the United States.</em></h2>
+      <div class="journey">
+        <div class="school rv">
+          <span class="badge">GPA 4.0</span>
+          <span class="yr">2024</span>
+          <h3>BS in Computer Science and Information Technology</h3>
+          <p>Deerwalk Institute of Technology · Kathmandu, Nepal</p>
+        </div>
+        <div class="path" aria-hidden="true">
+          <span class="plane">✈ about 7,400 miles</span>
+          <svg viewBox="0 0 160 120" preserveAspectRatio="none"><path d="M6 80 C 50 10, 110 10, 154 80"/></svg>
+        </div>
+        <div class="school rv">
+          <span class="yr">expected May 2027</span>
+          <h3>MS in Data Analytics</h3>
+          <p>Clark University · Worcester, MA</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="label rv" style="justify-content:center"><b>06</b> contact</div>
+      <h2 class="big rv">Let's <em>work together.</em></h2>
+      <p class="rv">I'm looking for data analyst and data engineering roles. If you have messy data, an open role, or just a question about my work, I'd like to hear from you.</p>
+      <button class="email-btn rv" id="copy" type="button">apurba.thapaliya@gmail.com <small id="copyTxt">click to copy</small></button>
+      <div class="links rv">
+        <a href="https://www.linkedin.com/in/apurba-thapaliya" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:apurba.thapaliya@gmail.com">Send an email</a>
+        <a href="assets/Apurba_Deep_Thapaliya_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr">2026</span> Apurba Deep Thapaliya · Worcester, MA</span><span class="colophon">Built from scratch with <b>HTML</b>, <b>CSS</b> and <b>JavaScript</b>. No frameworks or templates. Responsive, with light and dark mode.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  /* ================= data (from my resume) ================= */
+  const jobs = [
+    { co: 'Clark University', role: 'Graduate Assistant', place: 'Worcester, MA', years: 'Jan 2026 – Present', start: 2026,
+      fact: ['2', "Deans' offices I track data and write reports for"],
+      bullets: [
+        "Track event planning and event data in Excel, and create reports for the Dean of the College and the Dean of Students office.",
+        "Plan and run events for the Deans' offices, and serve as the point person for stakeholders in other departments.",
+        "Process student and faculty requests that come into the office, and write correspondence for leadership."
+      ],
+      tools: ['Excel', 'Reporting', 'Stakeholder communication'] },
+    { co: 'Invisible Technologies', role: 'Advanced AI Data Trainer', place: 'Remote', years: 'Sep 2024 – Aug 2025', start: 2024.7,
+      fact: ['30%', 'better model accuracy on the NVIDIA Arcade AI project'],
+      bullets: [
+        "Helped improve model accuracy by 30% on the NVIDIA Arcade AI project by generating and testing RLHF and Supervised Fine-Tuning (SFT) data for training large language models (LLMs).",
+        "Generated LLM training data for several other client projects, including one for Google.",
+        "Scored and ranked model responses against quality rubrics, and wrote and tested prompts that required Python, SQL and math.",
+        "Quality tested other trainers' work and corrected prompts that didn't meet the guidelines.",
+        "Extracted, preprocessed and mined training data with teammates around the world."
+      ],
+      tools: ['LLMs', 'RLHF', 'SFT', 'Python', 'SQL', 'Prompt Engineering'] },
+    { co: 'Deerhold Nepal Ltd.', role: 'Data Engineering Intern', place: 'Nepal', years: 'May 2024 – Aug 2024', start: 2024.4,
+      fact: ['ETL', 'raw public files to clean, queryable data on AWS'],
+      bullets: [
+        "Developed Python scripts to standardize public hospital Machine-Readable Files (MRFs) released under the CMS Hospital Price Transparency Rule, and checked prices against each other for errors and inconsistencies.",
+        "Uploaded the standardized data to Amazon S3 buckets and queried prices across hospitals using SQL in Amazon Athena.",
+        "Preprocessed raw healthcare data from across the U.S. into a standard format and mapped between healthcare coding standards.",
+        "Created Tableau dashboards and Excel charts for analytic reporting, and wrote SQL stored procedures."
+      ],
+      tools: ['Python', 'ETL', 'Amazon S3', 'Amazon Athena', 'SQL', 'Tableau', 'Excel'] }
+  ];
+
+  const shelves = [
+    ['Languages', [['SQL', 'Athena queries and stored procedures at Deerhold; SQL prompts at Invisible'], ['Python', 'Data scripts at Deerhold; the ML model in my paper'], ['pandas', 'Cleaning and reshaping data in Python'], ['NumPy', 'Numerical work in Python'], ['scikit-learn', 'The classification model in my research'], ['PHP', 'Web development']]],
+    ['Analytics & visualization', [['Tableau', 'Dashboards for analytic reporting at Deerhold'], ['Excel', 'Tracking and reports for two Deans at Clark'], ['Jupyter', 'Notebooks for analysis and modeling'], ['Data Cleaning', 'Standardizing raw files at Deerhold'], ['ETL', 'Raw files to S3 to Athena at Deerhold'], ['Reporting', 'Reports for leadership at Clark and Deerhold']]],
+    ['Cloud & databases', [['AWS', 'Data storage and querying at Deerhold'], ['Amazon S3', 'Stored the standardized data'], ['Amazon Athena', 'Queried prices with SQL'], ['MySQL', 'Relational databases'], ['PostgreSQL', 'Relational databases'], ['Stored Procedures', 'Wrote them at Deerhold']]],
+    ['Machine learning & AI', [['Classification', 'Predicting patient no-shows'], ['LLM Evaluation', 'Scored and ranked model responses at Invisible'], ['RLHF', 'Training data for NVIDIA and other clients'], ['Supervised Fine-Tuning', 'SFT data at Invisible'], ['Prompt Engineering', 'Wrote and tested prompts at Invisible']]]
+  ];
+
+  const education = [
+    ['MS in Data Analytics', 'Clark University', 'May 2027 (expected)'],
+    ['BS in Computer Science and IT', 'Deerwalk Institute of Technology', '2024 · GPA 4.0']
+  ];
+
+  /* ================= theme + nav ================= */
+  const root = document.documentElement;
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} } };
+  if (store.get('theme')) root.dataset.theme = store.get('theme');
+  const dark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  $('#theme').addEventListener('click', () => { root.dataset.theme = dark() ? 'light' : 'dark'; store.set('theme', root.dataset.theme); });
+  const burger = $('#burger'), menu = $('#menu');
+  burger.addEventListener('click', () => { const o = menu.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+  $$('#menu a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); burger.setAttribute('aria-expanded', false); }));
+  const nav = $('#nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 10), { passive: true });
+  const secObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) $$('#menu a').forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  $$('main section[id]').forEach(s => secObs.observe(s));
+  const toast = $('#toast');
+  const say = m => { toast.textContent = m; toast.classList.add('show'); clearTimeout(say.t); say.t = setTimeout(() => toast.classList.remove('show'), 2200); };
+
+  /* ================= experience + search ================= */
+  $('#jobs').innerHTML = jobs.map((j, i) => `
+    <div class="job${i === 0 ? ' open' : ''}" data-i="${i}">
+      <button class="job-btn" aria-expanded="${i === 0}" aria-controls="jb${i}">
+        <span class="n">0${i + 1}</span>
+        <span><h3>${j.role}</h3><span class="co">${j.co} · ${j.place}</span></span>
+        <span class="yr">${j.years}</span>
+        <span class="plus" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+      </button>
+      <div class="job-body" id="jb${i}"><div><div class="job-inner">
+        <ul>${j.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+        <aside><div class="big-fact"><b>${j.fact[0]}</b><span>${j.fact[1]}</span></div>
+          <div class="tools">${j.tools.map(t => `<span>${t}</span>`).join('')}</div></aside>
+      </div></div></div>
+    </div>`).join('');
+  const setOpen = (job, open) => { job.classList.toggle('open', open); job.querySelector('.job-btn').setAttribute('aria-expanded', open); };
+  $$('.job-btn').forEach(b => b.addEventListener('click', () => { const job = b.closest('.job'); setOpen(job, !job.classList.contains('open')); }));
+
+  const quick = ['Python', 'SQL', 'AWS', 'Tableau', 'Excel', 'LLM'];
+  const fchips = $('#fchips'), search = $('#jobSearch'), fcount = $('#fcount');
+  fchips.innerHTML = quick.map(t => `<button class="fchip" aria-pressed="false" data-t="${t}">${t}</button>`).join('');
+  const applySearch = term => {
+    const v = term.trim().toLowerCase();
+    $$('.fchip', fchips).forEach(c => c.setAttribute('aria-pressed', c.dataset.t.toLowerCase() === v));
+    let roles = 0, lines = 0;
+    $$('.job').forEach(job => {
+      const j = jobs[+job.dataset.i];
+      const hay = (j.bullets.join(' ') + ' ' + j.tools.join(' ')).toLowerCase();
+      const items = $$('.job-inner li', job);
+      if (!v) { items.forEach((li, k) => { li.innerHTML = esc(j.bullets[k]); li.classList.remove('hit'); }); job.classList.remove('nomatch'); return; }
+      const re = new RegExp('(' + v.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      let any = hay.includes(v);
+      items.forEach((li, k) => {
+        const hit = j.bullets[k].toLowerCase().includes(v);
+        li.innerHTML = hit ? esc(j.bullets[k]).replace(re, '<mark>$1</mark>') : esc(j.bullets[k]);
+        li.classList.toggle('hit', hit); if (hit) lines++;
+      });
+      job.classList.toggle('nomatch', !any);
+      if (any) roles++;
+      setOpen(job, any);
+    });
+    fcount.textContent = v ? (roles ? `found in ${roles} role${roles > 1 ? 's' : ''}` : 'no matches yet') : '';
+  };
+  let st;
+  search.addEventListener('input', () => { clearTimeout(st); st = setTimeout(() => applySearch(search.value), 120); });
+  fchips.addEventListener('click', e => {
+    const c = e.target.closest('.fchip'); if (!c) return;
+    const on = c.getAttribute('aria-pressed') === 'true';
+    search.value = on ? '' : c.dataset.t; applySearch(search.value);
+  });
+
+  /* ================= skills ================= */
+  $('#shelves').innerHTML = shelves.map(([cat, items]) => `<div class="shelf rv"><h3>${cat}</h3>
+    <div class="items">${items.map(([n, w]) => `<span class="tag" tabindex="0">${n}<span class="where">${w}</span></span>`).join('')}</div></div>`).join('');
+  $('#shelves').addEventListener('click', e => {
+    const t = e.target.closest('.tag'); if (!t) return;
+    if (!matchMedia('(hover: hover)').matches || matchMedia('(max-width: 680px)').matches) say(t.firstChild.textContent + ': ' + t.querySelector('.where').textContent);
+  });
+
+  const placeTips = () => {
+    const tips = $$('#shelves .where'); tips.forEach(w => w.style.setProperty('--dx', '0px'));
+    const W = document.documentElement.clientWidth, m = 12;
+    tips.map(w => [w, w.getBoundingClientRect()]).forEach(([w, r]) => {
+      let dx = 0; if (r.right > W - m) dx = W - m - r.right; if (r.left + dx < m) dx = m - r.left;
+      w.style.setProperty('--dx', Math.round(dx) + 'px');
+    });
+  };
+  placeTips(); addEventListener('resize', placeTips); document.fonts && document.fonts.ready.then(placeTips);
+  if (!matchMedia('(hover: hover)').matches) { const intro = $('#skills .intro'); if (intro) intro.textContent = 'Tap any skill to see where I used it.'; }
+
+  /* ================= selected work interactions ================= */
+  (() => {
+    const fine = matchMedia('(hover: hover)').matches;
+    // bars: replay growth and count the label up
+    const vb = $('#vizBars'), pct = $('#pct'), cb = $('#capBars');
+    const replay = () => {
+      const card = vb.closest('.win'); if (!card.classList.contains('in')) return;
+      const bars = $('.bars', vb); bars.classList.add('reset'); void bars.offsetWidth; bars.classList.remove('reset');
+      if (reduce) return;
+      const t0 = performance.now();
+      const tick = now => { const p = Math.min(1, (now - t0) / 1100); pct.textContent = '+' + Math.round(30 * (1 - Math.pow(1 - p, 3))) + '%'; if (p < 1) requestAnimationFrame(tick); };
+      requestAnimationFrame(tick);
+    };
+    vb.closest('.win').addEventListener(fine ? 'mouseenter' : 'click', replay);
+    if (!fine) cb.textContent = 'tap to replay';
+    $$('.bars div', vb).forEach(d => d.addEventListener('mouseenter', () => {
+      cb.textContent = d.classList.contains('after') ? 'after: 30% more accurate' : 'baseline model accuracy';
+    }));
+    vb.addEventListener('mouseleave', () => cb.textContent = 'hover to replay');
+
+    // pipeline: highlight a step and explain it
+    const steps = $$('#vizFlow .st'), lines = $$('#vizFlow .ln'), cf = $('#capFlow');
+    new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { setTimeout(() => $('#vizFlow .flowline').classList.add('ready'), 1400); o.disconnect(); } }), { threshold: 0.3 }).observe($('#vizFlow'));
+    const txt = ['Python: standardize raw files', 'S3: store the clean data', 'Athena: query it with SQL', 'Tableau: build the dashboards'];
+    const light = k => { steps.forEach((st, n) => st.classList.toggle('on', n === k)); lines.forEach((l, n) => l.classList.toggle('on', n < k)); cf.textContent = k < 0 ? (fine ? 'hover a step' : 'tap a step') : txt[k]; };
+    steps.forEach((st, k) => { st.addEventListener('mouseenter', () => light(k)); st.addEventListener('click', () => light(k)); });
+    let cyc;
+    const flowCard = $('#vizFlow').closest('.win');
+    flowCard.addEventListener('mouseenter', () => { if (reduce) return; let k = 0; light(0); cyc = setInterval(() => { k = (k + 1) % 4; light(k); }, 1100); });
+    flowCard.addEventListener('mouseleave', () => { clearInterval(cyc); light(-1); });
+    $('#vizFlow').addEventListener('mouseenter', () => clearInterval(cyc));
+    if (!fine) cf.textContent = 'tap a step';
+
+    // sheet: fill rows like a report coming together
+    const cells = $$('#vizSheet .sheet i:not(.h)'), cs = $('#capSheet');
+    let timers = [];
+    const build = () => {
+      timers.forEach(clearTimeout); timers = [];
+      cells.forEach((c, n) => timers.push(setTimeout(() => c.classList.add(n >= cells.length - 5 ? 'sum' : 'go'), reduce ? 0 : n * 45)));
+      timers.push(setTimeout(() => cs.textContent = 'report ready for the Deans', reduce ? 0 : cells.length * 45 + 150));
+    };
+    const reset = () => { timers.forEach(clearTimeout); cells.forEach(c => c.classList.remove('go', 'sum')); cs.textContent = fine ? 'hover to build a report' : 'tap to build a report'; };
+    const sheetCard = $('#vizSheet').closest('.win');
+    if (fine) { sheetCard.addEventListener('mouseenter', build); sheetCard.addEventListener('mouseleave', reset); }
+    else { let on = false; sheetCard.addEventListener('click', () => { on = !on; on ? build() : reset(); }); cs.textContent = 'tap to build a report'; }
+  })();
+
+  /* ================= reveal + counters ================= */
+  const count = el => {
+    const to = parseFloat(el.dataset.to), dec = +(el.dataset.dec || 0), suf = el.dataset.suf || '';
+    const f = v => v.toFixed(dec) + (suf ? `<sup>${suf}</sup>` : '');
+    if (reduce) { el.innerHTML = f(to); return; }
+    const t0 = performance.now();
+    const step = now => { const p = Math.min(1, (now - t0) / 1400); el.innerHTML = f(to * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  const ro = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); $$('[data-to]', e.target).forEach(count); ro.unobserve(e.target); }), { threshold: 0.12 });
+  $$('.rv').forEach(el => ro.observe(el));
+
+  /* ================= contact ================= */
+  $('#copy').addEventListener('click', async () => {
+    const em = 'apurba.thapaliya@gmail.com';
+    try { await navigator.clipboard.writeText(em); $('#copyTxt').textContent = 'copied!'; say('Email copied. Talk soon.'); }
+    catch (e) { location.href = 'mailto:' + em; }
+    setTimeout(() => $('#copyTxt').textContent = 'click to copy', 2200);
+  });
+  // Email chooser: mailto only opens a desktop mail app, so offer Gmail and Outlook on the web too
+  const EM = 'apurba.thapaliya@gmail.com';
+  const menuEl = document.createElement('div');
+  menuEl.className = 'mailmenu'; menuEl.setAttribute('role', 'menu'); menuEl.hidden = true;
+  document.body.appendChild(menuEl);
+  const closeMenu = () => { menuEl.hidden = true; };
+  const openMenu = (btn, subject) => {
+    const su = encodeURIComponent(subject || '');
+    const opts = [
+      ['Gmail', `https://mail.google.com/mail/?view=cm&fs=1&to=${EM}${su ? '&su=' + su : ''}`, true],
+      ['Outlook', `https://outlook.office.com/mail/deeplink/compose?to=${EM}${su ? '&subject=' + su : ''}`, true],
+      ['Email app', `mailto:${EM}${su ? '?subject=' + su : ''}`, false]
+    ];
+    menuEl.innerHTML = `<p>Send an email with</p>` + opts.map(([n, h, ext]) => `<a role="menuitem" href="${h}" ${ext ? 'target="_blank" rel="noopener"' : ''}>${n}</a>`).join('') +
+      `<button role="menuitem" type="button" data-copy>Copy address</button>`;
+    menuEl.hidden = false;
+    const r = btn.getBoundingClientRect(), w = menuEl.offsetWidth, h = menuEl.offsetHeight;
+    let x = Math.min(Math.max(12, r.left + r.width / 2 - w / 2), innerWidth - w - 12);
+    let y = r.bottom + 10; if (y + h > innerHeight - 12) y = r.top - h - 10;
+    menuEl.style.left = x + 'px'; menuEl.style.top = y + 'px';
+    menuEl.querySelector('a').focus();
+  };
+  $$('a[href^="mailto:"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault(); e.stopPropagation();
+    const m = a.getAttribute('href').match(/subject=([^&]*)/);
+    openMenu(a, m ? decodeURIComponent(m[1]) : '');
+  }));
+  menuEl.addEventListener('click', async e => {
+    if (e.target.matches('[data-copy]')) {
+      try { await navigator.clipboard.writeText(EM); say('Email address copied'); } catch (err) { say(EM); }
+    }
+    closeMenu();
+  });
+  document.addEventListener('click', e => { if (!menuEl.hidden && !menuEl.contains(e.target)) closeMenu(); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+  addEventListener('scroll', closeMenu, { passive: true });
+  $('#yr').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
